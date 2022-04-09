@@ -4,6 +4,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TargetFramework>net6.0</TargetFramework>
+        <Title>PolymorphicModelBinder</Title>
+        <Authors>Maikel van Haaren</Authors>
+        <Description>A polymorphic model binder for ASP.NET Core.</Description>
+        <PackageProjectUrl>https://github.com/maikelvanhaaren/PolymorphicModelBinder</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/maikelvanhaaren/PolymorphicModelBinder</RepositoryUrl>
+        <PackageTags>polymorphic derived model binder asp.net core</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
