@@ -6,7 +6,6 @@ namespace PolymorphicModelBinder.Samples.Mvc.Controllers;
 
 public class HomeController : Controller
 {
-
     [HttpGet]
     public IActionResult Index(string type = "Dog")
     {
@@ -16,16 +15,9 @@ public class HomeController : Controller
             "Cat" => new Cat(),
             _ => throw new ArgumentOutOfRangeException(nameof(type))
         };
-
-        return View(new SampleViewModel()
-        {
-            Pet = pet
-        });
+        return View(new SampleViewModel(pet));
     }
 
     [HttpPost]
-    public IActionResult Index(SampleViewModel viewModel)
-    {
-        return View(viewModel);
-    }
+    public IActionResult Index(SampleViewModel viewModel) => View(viewModel);
 }
