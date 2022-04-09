@@ -1,0 +1,25 @@
+﻿@using PolymorphicModelBinder.Html
+@model SampleViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1 class="display-4">Welcome</h1>
+
+    <p class="lead">
+        <a href="@Url.Action("Index", new { type = "Dog" })">Dog</a> or
+        <a href="@Url.Action("Index", new { type = "Cat" })">Cat</a>?
+    </p>
+    
+    <hr />
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.PolymorphicTypeInValueFor(x => x.Pet)
+        @Html.EditorFor(x => x.Pet)
+        <hr />
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    }
+</div>
