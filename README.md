@@ -29,3 +29,5 @@ A polymorphic model binder for ASP.net core. Bind to the type you want!
             polymorphicBuilder.AddFromTypeInValue<Cat>();
         });
     });
+
+[MVC Sample project](./samples/PolymorphicModelBinder.Samples.Mvc)
