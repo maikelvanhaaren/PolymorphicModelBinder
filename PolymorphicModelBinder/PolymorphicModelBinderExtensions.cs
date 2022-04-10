@@ -1,28 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using PolymorphicModelBinder.Providers;
 
-namespace PolymorphicModelBinder;
-
-public static class PolymorphicModelBinderExtensions
+namespace PolymorphicModelBinder
 {
-    public static IServiceCollection AddPolymorphicModelBinder(this IServiceCollection services, Action<PolymorphicModelBinderOptions> options)
+    public static class PolymorphicModelBinderExtensions
     {
-        services.AddSingleton<IValidateOptions<PolymorphicModelBinderOptions>, PolymorphicModelBinderOptionsValidator>();
-        
-        services
-            .AddOptions<PolymorphicModelBinderOptions>()
-            .Configure(modelBinderOptions =>
-            {
-                options?.Invoke(modelBinderOptions);
-            })
-            .ValidateOnStart();
-        
-        services.Configure<MvcOptions>(mvcOptions =>
+        public static IServiceCollection AddPolymorphicModelBinder(this IServiceCollection services, Action<PolymorphicModelBinderOptions> options)
         {
-            mvcOptions.ModelBinderProviders.Insert(0, new PolymorphicModelBinderProvider());
-        });
+            services.AddSingleton<IValidateOptions<PolymorphicModelBinderOptions>, PolymorphicModelBinderOptionsValidator>();
+            services.AddSingleton<IPolymorphicBindableModelBinderProvider, PolymorphicBindableModelBinderProvider>();
         
-        return services;
+            services
+                .AddOptions<PolymorphicModelBinderOptions>()
+                .Configure(modelBinderOptions =>
+                {
+                    options?.Invoke(modelBinderOptions);
+                })
+                .ValidateOnStart();
+        
+            services.Configure<MvcOptions>(mvcOptions =>
+            {
+                mvcOptions.ModelBinderProviders.Insert(0, new PolymorphicModelBinderProvider());
+            });
+
+            return services;
+        }
     }
 }

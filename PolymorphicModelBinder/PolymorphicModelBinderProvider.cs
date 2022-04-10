@@ -1,30 +1,28 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using PolymorphicModelBinder.Entries;
+using PolymorphicModelBinder.Providers;
 
-namespace PolymorphicModelBinder;
-
-internal class PolymorphicModelBinderProvider : IModelBinderProvider
+namespace PolymorphicModelBinder
 {
-    public IModelBinder? GetBinder(ModelBinderProviderContext context)
+    internal class PolymorphicModelBinderProvider : IModelBinderProvider
     {
-        var options = context.Services.GetRequiredService<IOptions<PolymorphicModelBinderOptions>>().Value;
-
-        var matchedEntry = options.Entries.FirstOrDefault(entry => entry.IsMatch(context));
-        
-        if (matchedEntry == null)
-            return null;
-        
-        var binders = new List<(IPolymorphicImplementation, ModelMetadata, IModelBinder)>();
-        
-        foreach (var entryType in matchedEntry.GetTypes())
+        public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {
-            var modelMetadata = context.MetadataProvider.GetMetadataForType(entryType.BindToType);
-            var binder = context.CreateBinder(modelMetadata);
-            binders.Add((entryType, modelMetadata, binder));
-        }
+            var polymorphicModelBinderOptions = context.Services.GetRequiredService<IOptions<PolymorphicModelBinderOptions>>().Value;
+
+            var bindableCollection = polymorphicModelBinderOptions.Entries
+                .FirstOrDefault(entry => entry.IsMatch(context));
         
-        return new PolymorphicModelBinder(binders);
+            if (bindableCollection == null)
+                return null;
+
+            var bindableModelBindersProvider = context.Services.GetRequiredService<IPolymorphicBindableModelBinderProvider>();
+        
+            var binders = bindableModelBindersProvider
+                .Provide(context, bindableCollection);
+        
+            return new PolymorphicModelBinder(binders);
+        }
     }
 }

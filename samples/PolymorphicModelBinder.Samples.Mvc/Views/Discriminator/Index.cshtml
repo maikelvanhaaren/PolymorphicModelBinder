@@ -1,0 +1,27 @@
+﻿@model PolymorphicModelBinder.Samples.Mvc.Models.IDevice
+
+@{
+    ViewData["Title"] = "Discriminator";
+}
+
+<div>
+    <h1 class="display-4">Poylmorphic as property</h1>
+
+    <p class="lead">
+        <a href="@Url.Action("Index", new { type = "Laptop" })">Laptop</a> or
+        <a href="@Url.Action("Index", new { type = "SmartPhone" })">SmartPhone</a>?
+    </p>
+    
+    <p>
+        Current type: @(Model?.GetType()?.ToString() ?? "unknown")
+    </p>
+    
+    <hr />
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.EditorFor(x => x)
+        <hr />
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    }
+</div>

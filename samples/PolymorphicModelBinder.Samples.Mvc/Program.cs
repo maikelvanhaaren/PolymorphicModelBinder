@@ -12,6 +12,12 @@ builder.Services.AddPolymorphicModelBinder(options =>
         polymorphicBuilder.AddFromTypeInValue<Dog>();
         polymorphicBuilder.AddFromTypeInValue<Cat>();
     });
+
+    options.Add<IDevice>(polymorphicBuilder =>
+    {
+        polymorphicBuilder.AddFromDiscriminator<Laptop>();
+        polymorphicBuilder.AddFromDiscriminator<SmartPhone>();
+    });
 });
 
 var app = builder.Build();

@@ -1,15 +1,16 @@
-namespace PolymorphicModelBinder.Samples.Mvc.Models;
-
-public class SampleViewModel
+namespace PolymorphicModelBinder.Samples.Mvc.Models
 {
-    public SampleViewModel()
+    public class SampleViewModel
     {
+        public SampleViewModel()
+        {
         
-    }
+        }
 
-    public SampleViewModel(Pet pet)
-    {
-        Pet = pet;
+        public SampleViewModel(Pet pet)
+        {
+            Pet = pet;
+        }
+        public Pet? Pet { get; set; }
     }
-    public Pet? Pet { get; set; }
 }

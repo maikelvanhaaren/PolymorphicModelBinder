@@ -1,25 +1,30 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Specialized;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using PolymorphicModelBinder.Tests.Models;
+using PolymorphicModelBinder.Tests.Models.Devices;
 
-namespace PolymorphicModelBinder.Tests;
-
-public class Tests
+namespace PolymorphicModelBinder.Tests
 {
-    [Test]
-    public void Test1()
+    public class Tests
     {
-        var services = new ServiceCollection();
-
-        services.AddPolymorphicModelBinder(options =>
+        [Test]
+        public void Test1()
         {
-            options.Add<Device>(polymorphicBuilder =>
+            var services = new ServiceCollection();
+
+            services.AddPolymorphicModelBinder(options =>
             {
-                polymorphicBuilder.AddFromTypeInValue<Laptop>();
-                polymorphicBuilder.AddFromTypeInValue<SmartPhone>();
+                options.Add<Device>(polymorphicBuilder =>
+                {
+                    polymorphicBuilder.AddFromTypeInValue<Laptop>();
+                    polymorphicBuilder.AddFromTypeInValue<SmartPhone>();
+                });
             });
-        });
         
-        Assert.Pass();
+            Assert.Pass();
+        }
     }
 }

@@ -1,12 +1,11 @@
 ﻿@using PolymorphicModelBinder.Html
-@model SampleViewModel
-
+@model Pet
 @{
-    ViewData["Title"] = "Poylmorphic as property";
+    ViewData["Title"] = "Poylmorphic as model";
 }
 
 <div>
-    <h1 class="display-4">Poylmorphic as property</h1>
+    <h1 class="display-4">Poylmorphic as model</h1>
 
     <p class="lead">
         <a href="@Url.Action("Index", new { type = "Dog" })">Dog</a> or
@@ -15,10 +14,10 @@
     
     <hr />
 
-    @using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm("PolymorphicModel", "Home", FormMethod.Post))
     {
-        @Html.PolymorphicTypeInValueFor(x => x.Pet)
-        @Html.EditorFor(x => x.Pet)
+        @Html.PolymorphicTypeInValue()
+        @Html.EditorFor(x => x)
         <hr />
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     }
