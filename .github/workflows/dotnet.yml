@@ -29,3 +29,4 @@ jobs:
         PROJECT_FILE_PATH: "./PolymorphicModelBinder/PolymorphicModelBinder.csproj"
         VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
         NUGET_KEY: ${{secrets.NUGET_API_KEY}} 
+        INCLUDE_SYMBOLS: true
