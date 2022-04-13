@@ -1,5 +1,6 @@
 using PolymorphicModelBinder;
 using PolymorphicModelBinder.Samples.Mvc.Models;
+using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
 
 var builder = WebApplication.CreateBuilder(args);
 

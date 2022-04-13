@@ -1,25 +1,10 @@
-﻿@using PolymorphicModelBinder.Html
-@model SampleViewModel
-
-@{
-    ViewData["Title"] = "Poylmorphic as property";
+﻿@{
+    ViewData["Title"] = "Polymorphic model binder";
 }
 
-<div>
-    <h1 class="display-4">Poylmorphic as property</h1>
-
-    <p class="lead">
-        <a href="@Url.Action("Index", new { type = "Dog" })">Dog</a> or
-        <a href="@Url.Action("Index", new { type = "Cat" })">Cat</a>?
+<div class="mb-4">
+    <h1>Polymorphic model binder</h1>
+    <p>
+        This is an example ASP.NET Core project with showing the options of polymorphic model binder.
     </p>
-    
-    <hr />
-
-    @using (Html.BeginForm(FormMethod.Post))
-    {
-        @Html.PolymorphicTypeInValueFor(x => x.Pet)
-        @Html.EditorFor(x => x.Pet)
-        <hr />
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-    }
 </div>

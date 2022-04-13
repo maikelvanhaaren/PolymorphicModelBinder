@@ -1,19 +1,19 @@
-﻿@using System.Text.Json
-@using PolymorphicModelBinder.Html
-@model PolymorphicModelBinder.Samples.Mvc.Models.Devices.IDevice
+﻿@using PolymorphicModelBinder.Html
+@using System.Text.Json
+@model PolymorphicModelBinder.Samples.Mvc.Models.Pet
 
 @{
-    ViewData["Title"] = "Discriminator field";
+    ViewData["Title"] = "Polymorphic as model";
 }
 
 <div class="mb-4">
-    <h1>Discriminator field</h1>
+    <h1>Polymorphic as model</h1>
     <p>
-        This is an example implementation for a polymorphic as property.
+        This is an example implementation for a polymorphic as model
     </p>
     <div>
-        <a href="@Url.Action("Index", new { type = "Laptop" })" class="btn btn-outline-primary">Switch to laptop</a>
-        <a href="@Url.Action("Index", new { type = "SmartPhone" })" class="btn btn-outline-primary">Switch to smartphone</a>
+        <a href="@Url.Action("Index", new { type = "Dog" })" class="btn btn-outline-primary">Switch to dog</a>
+        <a href="@Url.Action("Index", new { type = "Cat" })" class="btn btn-outline-primary">Switch to cat</a>
     </div>
 </div>
 
@@ -38,7 +38,7 @@
 }
 
 <form asp-action="Index" method="post" id="form">
-    <input asp-for="Discriminator" type="hidden" />
+    @Html.PolymorphicTypeInValue()
     @Html.PolymorphicEditorFor(x => x)
     <div>
         <button type="submit" class="btn btn-primary">Submit</button>

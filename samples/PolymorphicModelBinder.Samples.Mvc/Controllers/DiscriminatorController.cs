@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PolymorphicModelBinder.Samples.Mvc.Models;
+using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
 
 namespace PolymorphicModelBinder.Samples.Mvc.Controllers;
 
 public class DiscriminatorController : Controller
 {
-    // GET
     public IActionResult Index(string type = "Laptop")
     {
         IDevice device = type switch

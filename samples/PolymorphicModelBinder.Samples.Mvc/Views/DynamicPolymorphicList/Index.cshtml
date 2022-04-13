@@ -1,0 +1,68 @@
+﻿@using PolymorphicModelBinder.Html
+@using System.Text.Json
+@model PolymorphicModelBinder.Samples.Mvc.Models.DynamicPolymorphicListViewModel
+
+@{
+    ViewData["Title"] = "Dynamic polymorphic list";
+}
+
+<div class="mb-4">
+    <h1>Dynamic polymorphic list</h1>
+    <p>
+        This is an example implementation for a dynamic polymorphic list.
+    </p>
+</div>
+
+@if (ViewContext.HttpContext.Request.Method == "POST")
+{
+    var list = ViewContext.HttpContext.Request.Form.Keys
+        .ToDictionary<string?, string, string>(key => key, key =>  ViewContext.HttpContext.Request.Form[key]);
+
+    var output = JsonSerializer.Serialize(list, new JsonSerializerOptions()
+    {
+        WriteIndented = true
+    });
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Form
+        </div>
+        <div class="card-body">
+            <pre>@output</pre>
+        </div>
+    </div>
+}
+
+<form asp-action="Index" method="post" id="form">
+    <div id="items">
+        @for (var i = 0; i < Model?.Pets.Count; i++)
+        {
+            @Html.PolymorphicTypeInValueFor(x => x.Pets[i])
+            @Html.PolymorphicEditorFor(x => x.Pets[i])
+        }
+    </div>
+    <div>
+        <a href="#" class="btn btn-outline-primary add" data-type="@nameof(Dog)">Add dog</a>
+        <a href="#" class="btn btn-outline-primary add" data-type="@nameof(Cat)">Add cat</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        $(".add").click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                async: true,
+                data: $("#form").serialize(),
+                type: "POST",
+                url: `DynamicPolymorphicList/AddEntry?type=${$(this).data("type")}`,
+                success: function (partialView)
+                {
+                    $("#items").html(partialView);
+                }
+            });
+        });
+    </script>
+}

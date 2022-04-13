@@ -19,7 +19,7 @@ namespace PolymorphicModelBinder.Entries.TypeInValue
             var value = bindingContext.ValueProvider.GetValue(fieldName);
 
             if (value == ValueProviderResult.None)
-                throw new ArgumentNullException(nameof(value));
+                return false;
 
             return Type.GetType(value.FirstValue) == BindToType;
         }

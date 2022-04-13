@@ -1,6 +1,6 @@
-namespace PolymorphicModelBinder.Samples.Mvc.Models;
+namespace PolymorphicModelBinder.Samples.Mvc.Models.Devices;
 
-class SmartPhone : IDevice
+public class SmartPhone : IDevice
 {
     public string Discriminator => nameof(SmartPhone);
     public string Brand { get; set; }
