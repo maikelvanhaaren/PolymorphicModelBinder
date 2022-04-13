@@ -1,7 +1,8 @@
-﻿namespace PolymorphicModelBinder.Samples.Mvc.Models.Devices;
-
-public interface IDevice
+﻿namespace PolymorphicModelBinder.Samples.Mvc.Models.Devices
 {
-    string Discriminator { get; }
-    public string Brand { get; set; }
+    public interface IDevice
+    {
+        string Discriminator { get; }
+        public string Brand { get; set; }
+    }
 }

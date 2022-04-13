@@ -1,21 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
 
-namespace PolymorphicModelBinder.Samples.Mvc.Controllers;
-
-public class DiscriminatorController : Controller
+namespace PolymorphicModelBinder.Samples.Mvc.Controllers
 {
-    public IActionResult Index(string type = "Laptop")
+    public class DiscriminatorController : Controller
     {
-        IDevice device = type switch
+        public IActionResult Index(string type = "Laptop")
         {
-            "Laptop" => new Laptop(),
-            "SmartPhone" => new SmartPhone(),
-            _ => throw new ArgumentOutOfRangeException(nameof(type))
-        };
-        return View(device);
-    }
+            IDevice device = type switch
+            {
+                "Laptop" => new Laptop(),
+                "SmartPhone" => new SmartPhone(),
+                _ => throw new ArgumentOutOfRangeException(nameof(type))
+            };
+            return View(device);
+        }
 
-    [HttpPost]
-    public IActionResult Index(IDevice device) => View(device);
+        [HttpPost]
+        public IActionResult Index(IDevice device) => View(device);
+    }
 }

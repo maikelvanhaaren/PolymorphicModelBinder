@@ -1,14 +1,17 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
+using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
 
-namespace PolymorphicModelBinder.Samples.Mvc.Models;
-
-public class DynamicPolymorphicListViewModel
+namespace PolymorphicModelBinder.Samples.Mvc.Models
 {
-    public DynamicPolymorphicListViewModel()
+    public class DynamicPolymorphicListViewModel
     {
-        Pets = new List<Pet>();
-    }
+        public DynamicPolymorphicListViewModel()
+        {
+            Pets = new List<Pet>();
+        }
     
-    public IList<Pet> Pets { get; set; }
+        public IList<Pet> Pets { get; set; }
+    }
 }

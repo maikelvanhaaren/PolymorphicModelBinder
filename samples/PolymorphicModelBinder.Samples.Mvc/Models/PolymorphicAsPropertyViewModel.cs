@@ -1,15 +1,18 @@
-﻿namespace PolymorphicModelBinder.Samples.Mvc.Models;
+﻿using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
 
-public class PolymorphicAsPropertyViewModel
+namespace PolymorphicModelBinder.Samples.Mvc.Models
 {
-    public PolymorphicAsPropertyViewModel()
+    public class PolymorphicAsPropertyViewModel
     {
+        public PolymorphicAsPropertyViewModel()
+        {
         
-    }
+        }
 
-    public PolymorphicAsPropertyViewModel(Pet pet)
-    {
-        Pet = pet;
+        public PolymorphicAsPropertyViewModel(Pet pet)
+        {
+            Pet = pet;
+        }
+        public Pet Pet { get; set; }
     }
-    public Pet? Pet { get; set; }
 }

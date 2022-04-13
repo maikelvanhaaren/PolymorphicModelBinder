@@ -1,3 +1,5 @@
+using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
+
 namespace PolymorphicModelBinder.Samples.Mvc.Models
 {
     public class SampleViewModel
@@ -11,6 +13,6 @@ namespace PolymorphicModelBinder.Samples.Mvc.Models
         {
             Pet = pet;
         }
-        public Pet? Pet { get; set; }
+        public Pet Pet { get; set; }
     }
 }

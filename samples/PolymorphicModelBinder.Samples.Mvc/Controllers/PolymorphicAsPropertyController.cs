@@ -1,22 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using PolymorphicModelBinder.Samples.Mvc.Models;
+using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
 
-namespace PolymorphicModelBinder.Samples.Mvc.Controllers;
-
-public class PolymorphicAsPropertyController : Controller
+namespace PolymorphicModelBinder.Samples.Mvc.Controllers
 {
-    [HttpGet]
-    public IActionResult Index(string type = "Dog")
+    public class PolymorphicAsPropertyController : Controller
     {
-        Pet pet = type switch
+        [HttpGet]
+        public IActionResult Index(string type = "Dog")
         {
-            "Dog" => new Dog(),
-            "Cat" => new Cat(),
-            _ => throw new ArgumentOutOfRangeException(nameof(type))
-        };
-        return View(new PolymorphicAsPropertyViewModel(pet));
-    }
+            Pet pet = type switch
+            {
+                "Dog" => new Dog(),
+                "Cat" => new Cat(),
+                _ => throw new ArgumentOutOfRangeException(nameof(type))
+            };
+            return View(new PolymorphicAsPropertyViewModel(pet));
+        }
 
-    [HttpPost]
-    public IActionResult Index(PolymorphicAsPropertyViewModel viewModel) => View(viewModel);
+        [HttpPost]
+        public IActionResult Index(PolymorphicAsPropertyViewModel viewModel) => View(viewModel);
+    }
 }

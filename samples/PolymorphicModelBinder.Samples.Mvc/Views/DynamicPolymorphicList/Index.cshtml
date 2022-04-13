@@ -1,5 +1,6 @@
 ﻿@using PolymorphicModelBinder.Html
 @using System.Text.Json
+@using PolymorphicModelBinder.Samples.Mvc.Models.Pets
 @model PolymorphicModelBinder.Samples.Mvc.Models.DynamicPolymorphicListViewModel
 
 @{
@@ -16,7 +17,7 @@
 @if (ViewContext.HttpContext.Request.Method == "POST")
 {
     var list = ViewContext.HttpContext.Request.Form.Keys
-        .ToDictionary<string?, string, string>(key => key, key =>  ViewContext.HttpContext.Request.Form[key]);
+        .ToDictionary<string, string, string>(key => key, key =>  ViewContext.HttpContext.Request.Form[key]);
 
     var output = JsonSerializer.Serialize(list, new JsonSerializerOptions()
     {

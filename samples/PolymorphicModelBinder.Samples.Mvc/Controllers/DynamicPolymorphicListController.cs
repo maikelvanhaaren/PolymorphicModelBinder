@@ -1,47 +1,51 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using PolymorphicModelBinder.Samples.Mvc.Models;
 using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
+using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
 
-namespace PolymorphicModelBinder.Samples.Mvc.Controllers;
-
-public class DynamicPolymorphicListController : Controller
+namespace PolymorphicModelBinder.Samples.Mvc.Controllers
 {
-    [HttpGet]
-    public IActionResult Index()
+    public class DynamicPolymorphicListController : Controller
     {
-        return View(new DynamicPolymorphicListViewModel()
+        [HttpGet]
+        public IActionResult Index()
         {
-            Pets = new List<Pet>()
+            return View(new DynamicPolymorphicListViewModel()
             {
-                new Cat()
+                Pets = new List<Pet>()
                 {
-                    Name = "Garfield",
-                    CanMeow = true
-                },
-                new Dog()
-                {
-                    Name = "Noeska",
-                    CanBark = true,
+                    new Cat()
+                    {
+                        Name = "Garfield",
+                        CanMeow = true
+                    },
+                    new Dog()
+                    {
+                        Name = "Noeska",
+                        CanBark = true,
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
     
-    [HttpPost]
-    public IActionResult Index(DynamicPolymorphicListViewModel viewModel)
-    {
-        return View(viewModel);
-    }
-    
-    [HttpPost]
-    public IActionResult AddEntry(DynamicPolymorphicListViewModel viewModel, string type)
-    {
-        viewModel.Pets.Add(type switch
+        [HttpPost]
+        public IActionResult Index(DynamicPolymorphicListViewModel viewModel)
         {
-            "Dog" => new Dog() { Name = "New dog" },
-            "Cat" => new Cat() { Name = "New cat" },
-            _ => throw new ArgumentOutOfRangeException(nameof(type))
-        });
-        return PartialView(viewModel);
+            return View(viewModel);
+        }
+    
+        [HttpPost]
+        public IActionResult AddEntry(DynamicPolymorphicListViewModel viewModel, string type)
+        {
+            viewModel.Pets.Add(type switch
+            {
+                "Dog" => new Dog() { Name = "New dog" },
+                "Cat" => new Cat() { Name = "New cat" },
+                _ => throw new ArgumentOutOfRangeException(nameof(type))
+            });
+            return PartialView(viewModel);
+        }
     }
 }

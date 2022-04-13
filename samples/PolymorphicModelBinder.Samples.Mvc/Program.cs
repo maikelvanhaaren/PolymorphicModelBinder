@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using PolymorphicModelBinder;
 using PolymorphicModelBinder.Samples.Mvc.Models;
 using PolymorphicModelBinder.Samples.Mvc.Models.Devices;
+using PolymorphicModelBinder.Samples.Mvc.Models.Pets;
 
 var builder = WebApplication.CreateBuilder(args);
 

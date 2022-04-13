@@ -3,14 +3,16 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;net5.0;netstandard2.1</TargetFrameworks>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <Title>PolymorphicModelBinder</Title>
         <Authors>Maikel van Haaren</Authors>
         <Description>A polymorphic model binder for ASP.NET Core.</Description>
         <PackageProjectUrl>https://github.com/maikelvanhaaren/PolymorphicModelBinder</PackageProjectUrl>
         <RepositoryUrl>https://github.com/maikelvanhaaren/PolymorphicModelBinder</RepositoryUrl>
         <PackageTags>polymorphic derived model binder asp.net core</PackageTags>
-        <PackageVersion>1.0.0</PackageVersion>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>

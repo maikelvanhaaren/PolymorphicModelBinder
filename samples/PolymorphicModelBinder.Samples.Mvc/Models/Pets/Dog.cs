@@ -1,4 +1,4 @@
-namespace PolymorphicModelBinder.Samples.Mvc.Models
+namespace PolymorphicModelBinder.Samples.Mvc.Models.Pets
 {
     public class Dog : Pet 
     {
