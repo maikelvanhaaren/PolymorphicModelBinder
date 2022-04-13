@@ -1,6 +1,6 @@
 # PolymorphicModelBinder
 
-A polymorphic model binder for ASP.net Core. Bind to the type you want! 
+A polymorphic model binder for ASP.NET Core. Bind to the type you want! 
 
 ## Getting Started
 
